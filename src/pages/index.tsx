@@ -27,7 +27,6 @@ const PatientsListPage = () => {
 
         getApi(url)
             .then((r: any) => {
-                console.log(r);
                 setPatients(r);
             })
             .catch((error: any) => {

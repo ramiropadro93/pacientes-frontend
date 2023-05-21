@@ -7,11 +7,14 @@ import { postApi } from "../helpers/ApiUtility";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "@emotion/styled";
+import moment from "moment";
+import { useTranslation } from "react-i18next";
+import '../helpers/i18n';
 
 const AgregarPaciente = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [fechaNacimientoElegida, setFechaNacimientoElegida] = useState(null);
-
+    const {t} = useTranslation();
     const DatePickerWrapper = styled(DatePicker)`
         width: 98%;
         height: 23px;
@@ -41,6 +44,8 @@ const AgregarPaciente = () => {
     } = useForm<PatientFormData>();
 
     const onSubmit: SubmitHandler<PatientFormData> = (data) => {
+        
+        const fechaN = moment(data.fechaNacimiento).format('DD/MM/YYYY');
         const url = API_URL + "/Paciente/AddOrUpdatePaciente";
         const body = {
             Nombre: data.nombre,
@@ -51,7 +56,7 @@ const AgregarPaciente = () => {
             MotivoIngreso: data.motivoIngreso,
             Estado: data.estado,
             Genero: data.genero,
-            FechaNacimiento: data.fechaNacimiento,
+            FechaNacimiento: fechaN,
             Doctor: data.doctor,
             Medicacion: data.medicacion,
             Procedimientos: data.procedimientos
@@ -244,8 +249,8 @@ const AgregarPaciente = () => {
                         className={styles["select-input"]}
                     >
                         <option value={0}>Seleccione una opción</option>
-                        <option value={1}>Terapia intensiva</option>
-                        <option value={2}>Sala común</option>
+                        <option value={1}>{t("TerapiaIntensiva")}</option>
+                        <option value={2}>{t("SalaComun")}</option>
                     </select>
                     {errors.estado && (
                         <span className={styles["error-message"]}>

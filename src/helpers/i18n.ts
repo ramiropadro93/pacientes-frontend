@@ -5,22 +5,24 @@ const resources = {
     en: {
         translation: {
             "SalaComun": "Common Room",
+            "TerapiaIntensiva": "Intensive Care",
+            "DadoAlta": "Discharged",
         }
     },
     es: {
         translation: {
-            "SalaComun": "Sala Común",
+            "SalaComun": "Sala común",
+            "TerapiaIntensiva": "Terapia intensiva",
+            "DadoAlta": "Dado de alta",
         }
     }
 };
-
-i18n
-    .use(initReactI18next) 
+i18n.use(initReactI18next)
     .init({
         resources,
-        lng: "en",
+        lng: "es",
         interpolation: {
-            escapeValue: false
+            escapeValue: false 
         }
     });
 
